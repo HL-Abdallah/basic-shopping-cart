@@ -1,0 +1,40 @@
+.App {
+    display : flex;
+    flex-wrap: wrap;
+    height : 100%;
+}
+.products {
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex : 1;
+    gap : 30px;
+    height : 100%;
+    min-width: 500px;
+}
+.productWrapper {
+    display: flex;
+    flex-direction: column;
+    gap : 30px;
+}
+.cart {
+    background-color: #f6f6f6;
+    flex : 1;
+    height : 100%;
+    min-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+.title {
+    text-transform: uppercase;
+    margin: 30px 0px ;
+    font-size: 24px;
+    font-weight: 600;
+}
+.cartTitle {
+    text-transform: uppercase;
+    margin: 30px 0px 30px 70px;
+    font-size: 24px;
+    font-weight: 600;
+}

@@ -1,0 +1,21 @@
+.summaryContainer {
+    display: flex;
+    flex-direction: column;
+    padding : 50px 50px 50px 0px;
+    gap : 25px;
+    background-color: #f6f6f6;
+}
+.item {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+}
+.item h4 {
+    color : rgb(99, 99, 99);
+    align-self: flex-end;
+}
+.item span {
+    font-weight: 600;
+    font-size: 15px;
+    align-self: flex-end;
+}

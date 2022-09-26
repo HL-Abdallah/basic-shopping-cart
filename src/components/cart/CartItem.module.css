@@ -1,0 +1,56 @@
+.container {
+    border-bottom: 1px solid gray;
+    display: flex;
+    width : 80%;
+    margin : auto;
+}
+.image {
+    height: 100px;
+    width : 100px;
+    margin: 10px;
+    border-radius: 50%;
+    padding : 5px;
+    object-fit: scale-down;
+    border : 1px solid grey;
+}
+.imageContainer {
+    flex-shrink: 1;
+}
+.priceSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 50px;
+}
+.priceSection span {
+    font-weight: 600;
+    font-size: 15px;
+    align-self: flex-end;
+}
+.discount {
+    text-decoration: line-through;
+    color : red;
+}
+.quantityControl {
+    display : flex;
+}
+.quantityControl button {
+    border-radius: 50%;
+    border : 1px solid grey;
+    vertical-align: top;
+}
+.quantityControl span {
+    font-weight: 600;
+}
+.nameAndQuantity {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 10px 0px;
+}
+.quantityControl {
+    display: flex;
+    gap : 15px;
+}
