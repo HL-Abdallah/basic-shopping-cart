@@ -2,9 +2,14 @@ import React from 'react'
 import s from './CartItem.module.css'
 import formatPrice from '../../utils/formatPrice'
 
-const CartItem = ({product}) => {
+const CartItem = ({ product, handleDecrement, onIncrement, currentCount, prices }) => {
 
-  
+  let breadDiscount = 0;
+  if (currentCount && prices && product) breadDiscount = (product.price * (prices.halfPriceBreads * 0.5) > (product.price * currentCount) ?
+    (product.price * currentCount) - (product.price * (prices.halfPriceBreads * 0.5)) :
+    (product.price * (prices.halfPriceBreads * 0.5))
+  );
+
   return (
     <div className={s.container}>
       <div className={s.imageContainer}>
@@ -14,16 +19,19 @@ const CartItem = ({product}) => {
         <h4>{product.name}</h4>
         <div className={s.quantityControl}>
           <span>quantity</span>
-          <button>-</button>
-          <span>2</span>
-          <button>+</button>
+          <button onClick={() => handleDecrement(product.id)}>-</button>
+          <span>{currentCount}</span>
+          <button onClick={() => onIncrement(product.id)}>+</button>
         </div>
       </div>
       <div className={s.priceSection}>
-        { product.price === 1 && (
-          <span className={s.discount}>{formatPrice(0.5)}</span>
+        {(product.id === 2 && prices.freeMilks > 0) && (
+          <span className={s.discount}>{formatPrice(prices.freeMilks * product.price)}</span>
         )}
-        <span>{formatPrice(product.price * 3)}</span>
+        {(product.id === 1 && prices.halfPriceBreads > 0) && (
+          <span className={s.discount}>{formatPrice(breadDiscount)}</span>
+        )}
+        <span>{formatPrice(product.price * currentCount)}</span>
       </div>
     </div>
   )

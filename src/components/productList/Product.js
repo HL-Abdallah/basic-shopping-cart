@@ -1,9 +1,26 @@
 import s from "./Product.module.css";
 import formatPrice from '../../utils/formatPrice'
+import { useState, useEffect } from 'react'
 
-const Product = ({ product }) => {
+const Product = ({ product, items, onAdd }) => {
 
   const itemPrice = formatPrice(product.price);
+  const [alreadyAdded, setAlreadyAdded] = useState(false);
+
+  useEffect(() => {
+    const exist = items.filter(item => item.productID === product.id);
+    if (exist.length !== 0) {
+      setAlreadyAdded(true)
+    } else {
+      setAlreadyAdded(false)
+    }
+  }, [items, product.id])
+
+  const addToCart = () => {
+    if (!alreadyAdded) {
+      onAdd(product.id);
+    }
+  }
 
   return (
     <div className={s.container}>
@@ -21,7 +38,13 @@ const Product = ({ product }) => {
             <span className={s.price}>{itemPrice}</span>
           </div>
         </div>
-        <button className={s.addBtn} onClick={() => alert("product : "+product.name)}>Add to cart</button>
+        <button
+          disabled={alreadyAdded}
+          className={alreadyAdded ? s.disabledAddBtn : s.addBtn}
+          onClick={() => addToCart()}
+        >
+          {!alreadyAdded ? "Add to cart" : "In Cart ✔"}
+        </button>
       </div>
     </div>
   );

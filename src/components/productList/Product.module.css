@@ -3,11 +3,11 @@
   border-radius: 5px;
   display: flex;
   max-width: 550px;
-  max-height : 120px;
+  max-height: 120px;
 }
 .image {
   height: 100px;
-  width : 150px;
+  width: 150px;
   margin: 10px;
 }
 .imageContainer {
@@ -29,23 +29,32 @@
   text-transform: uppercase;
   padding: 8px 40px;
 }
+.disabledAddBtn {
+  color: white;
+  background-color: #b8d8fc;
+  align-self: flex-end;
+  border: none;
+  border-radius: 4px;
+  text-transform: uppercase;
+  padding: 8px 40px;
+}
 .data {
   flex: 1;
   display: flex;
 }
 .left {
-    flex : 1;
+  flex: 1;
 }
 .right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap : 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
 }
 .price {
-    font-weight: 600;
-    font-size: 20px;
+  font-weight: 600;
+  font-size: 20px;
 }
 .description {
-    margin-top: 10px;
+  margin-top: 10px;
 }

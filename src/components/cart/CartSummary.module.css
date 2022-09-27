@@ -4,6 +4,7 @@
     padding : 50px 50px 50px 0px;
     gap : 25px;
     background-color: #f6f6f6;
+    width : 90%;
 }
 .item {
     align-self: flex-end;
