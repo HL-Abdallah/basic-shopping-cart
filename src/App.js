@@ -22,38 +22,41 @@ function App() {
     items.forEach(obj => {
       totalPrice += Number(getItemByID(obj.productID).price * obj.count);
     });
-    // applying discounts:
-    // counting milk jugs
-    const breadObj = items.filter(item => item.productID === 1)[0];
+    let totalDiscountValue = 0;
+    // Milk discount :
     const milkCountObj = items.filter(item => item.productID === 2)[0];
-    let milkCount = 0;
-    if (milkCountObj) { milkCount = milkCountObj.count ?? 0; }
-
-    // workaround to remove fractional part of number without rounding it
-    const freeMilks = Number((milkCount / 4).toFixed(1).toString().split(".")[0]);
-    // counting butter
+    let freeMilkJars = 0;
+    if (milkCountObj) {
+      const milkPrice = getItemByID(2).price;
+      let milkCount = milkCountObj.count;
+      freeMilkJars = Number((milkCount / 4).toFixed(1).toString().split(".")[0]);
+      totalDiscountValue += freeMilkJars * milkPrice;
+    }
+    // Bread discount :
+    const breadCountObj = items.filter(item => item.productID === 1)[0];
     const butterCountObj = items.filter(item => item.productID === 3)[0];
-    let butterCount = 0;
-    if (butterCountObj) { butterCount = butterCountObj.count ?? 0 }
-    const halfPriceBreads = Number((butterCount / 2).toFixed(1).toString().split(".")[0]);
-    let totalDiscount = 0;
-    let breadTotalDiscount = 0;
-    if (breadObj) {
-      if (breadObj.price * (halfPriceBreads * 0.5) > (breadObj.price * breadObj.count)) {
-        breadTotalDiscount = (breadObj.price * breadObj.count) - (breadObj.price * (halfPriceBreads * 0.5))
+    let priceOfDiscountedBread = 0;
+    if (breadCountObj && butterCountObj) {
+      let butterCount = butterCountObj.count;
+      let breadAmount = breadCountObj.count;
+      let breadPrice = getItemByID(1).price;
+      let numOfDiscountedBread = (butterCount / 2).toFixed(1).toString().split(".")[0];
+      if ((breadAmount * breadPrice) < (numOfDiscountedBread * breadPrice * 0.5)) {
+        priceOfDiscountedBread = breadAmount * breadPrice;
+        totalDiscountValue += priceOfDiscountedBread;
       } else {
-        breadTotalDiscount = (breadObj.price * (halfPriceBreads * 0.5))
+        priceOfDiscountedBread = numOfDiscountedBread * breadPrice * 0.5;
+        totalDiscountValue += priceOfDiscountedBread;
       }
-    };
-    if (breadTotalDiscount) totalDiscount += breadTotalDiscount;
-    if (milkCountObj && freeMilks) totalDiscount += milkCountObj.price * freeMilks;
+    }
+
     setPrices(p => {
       return {
         ...p,
         subtotal: totalPrice ?? 0,
-        freeMilks: freeMilks ?? 0,
-        halfPriceBreads: halfPriceBreads ?? 0,
-        totalDiscount: totalDiscount ?? 0
+        freeMilks: freeMilkJars ?? 0,
+        priceOfDiscountedBread: priceOfDiscountedBread ?? 0,
+        totalDiscount: totalDiscountValue ?? 0
       }
     });
   }, [items])

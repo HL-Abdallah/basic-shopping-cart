@@ -4,12 +4,6 @@ import formatPrice from '../../utils/formatPrice'
 
 const CartItem = ({ product, handleDecrement, onIncrement, currentCount, prices }) => {
 
-  let breadDiscount = 0;
-  if (currentCount && prices && product) breadDiscount = (product.price * (prices.halfPriceBreads * 0.5) > (product.price * currentCount) ?
-    (product.price * currentCount) - (product.price * (prices.halfPriceBreads * 0.5)) :
-    (product.price * (prices.halfPriceBreads * 0.5))
-  );
-
   return (
     <div className={s.container}>
       <div className={s.imageContainer}>
@@ -28,8 +22,8 @@ const CartItem = ({ product, handleDecrement, onIncrement, currentCount, prices 
         {(product.id === 2 && prices.freeMilks > 0) && (
           <span className={s.discount}>{formatPrice(prices.freeMilks * product.price)}</span>
         )}
-        {(product.id === 1 && prices.halfPriceBreads > 0) && (
-          <span className={s.discount}>{formatPrice(breadDiscount)}</span>
+        {(product.id === 1 && prices.priceOfDiscountedBread > 0) && (
+          <span className={s.discount}>{formatPrice(prices.priceOfDiscountedBread)}</span>
         )}
         <span>{formatPrice(product.price * currentCount)}</span>
       </div>
